@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  article {
+    @apply text-black;
+  }
+
+  article h3 {
+    @apply font-bold my-4 text-4xl;
+  }
+
+  article h4 {
+    @apply font-bold my-5 text-3xl;
+  }
+
+  article h5 {
+    @apply font-bold my-5 text-2xl;
+  }
+
+  article hr {
+    @apply bg-black h-2 my-3;
+  }
+
+  article ol li {
+    @apply list-decimal list-inside my-2 text-xl;
+  }
+
+  article ul li {
+    @apply list-disc list-inside my-2 text-xl;
+  }
+
+  article ul li a {
+    @apply underline decoration-4 decoration-indigo-400 hover:decoration-8;
+  }
+
+  article p {
+    @apply my-3 text-xl;
+  }
+
+  article p span a {
+    @apply underline decoration-4 decoration-indigo-400 hover:decoration-8;
+  }
+}

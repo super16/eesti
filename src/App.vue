@@ -6,7 +6,7 @@ import TheNavigationSidebar from '@/components/TheNavigationSidebar.vue';
 
 <template>
   <NavigationHeader />
-  <div class="flex grow min-h-0">
+  <div class="flex flex-col-reverse sm:flex-row grow min-h-0">
     <TheNavigationSidebar />
     <TheDefinitionArea />
   </div>

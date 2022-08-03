@@ -32,7 +32,7 @@
   }
 
   article ul li a {
-    @apply underline decoration-4 decoration-indigo-400 hover:decoration-8;
+    @apply decoration-4 decoration-indigo-400 hover:decoration-8 underline;
   }
 
   article p {
@@ -40,6 +40,6 @@
   }
 
   article p span a {
-    @apply underline decoration-4 decoration-indigo-400 hover:decoration-8;
+    @apply decoration-4 decoration-indigo-400 hover:decoration-8 underline;
   }
 }

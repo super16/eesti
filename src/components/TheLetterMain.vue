@@ -8,7 +8,7 @@ const { currentLetter } = storeToRefs(store);
 </script>
 
 <template>
-  <h1 class="text-8xl font-bold text-black p-3 rounded-lg inline">
+  <h1 class="font-bold inline p-3 rounded-lg text-8xl text-black">
     {{ currentLetter.toUpperCase() }}
   </h1>
 </template>

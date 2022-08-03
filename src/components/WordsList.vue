@@ -26,7 +26,7 @@ watch(letter, (value, prevCount) => {
 <template>
   <ul
     id="start"
-    class="p-4 text-xl text-black font-bold"
+    class="font-bold p-4 text-black text-xl"
   >
     <WordListItem
       v-for="word in words"

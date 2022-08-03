@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <nav class="border-r-8 border-black w-96 overflow-y-auto h-full">
+  <nav class="border-black h-full overflow-y-auto sm:border-r-8 sm:w-96 w-full">
     <router-view name="LeftSidebar" />
   </nav>
 </template>

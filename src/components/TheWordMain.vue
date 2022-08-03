@@ -29,7 +29,7 @@ watch(pageId, (value, prevCount) => {
 <template>
   <h1
     id="definition"
-    class="text-8xl font-bold text-black rounded-lg inline"
+    class="break-words font-bold inline rounded-lg text-8xl text-black"
   >
     {{ currentWord }}
   </h1>

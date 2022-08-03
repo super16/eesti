@@ -65,7 +65,7 @@ const { currentLetter } = storeToRefs(store);
       <li
         v-for="letter in alphabet"
         :key="letter"
-        class="border-4 border-black rounded-full my-4 mx-3 hover:hue-rotate-180"
+        class="border-black border-4 hover:hue-rotate-180 mx-3 my-4 rounded-full"
         :class="{
           'bg-black scale-110': letter.toLowerCase() === currentLetter,
           [randomRotate()]: letter.toLowerCase() !== currentLetter,
@@ -78,13 +78,13 @@ const { currentLetter } = storeToRefs(store);
             name: 'wordsList',
             params: { letter: letter.toLowerCase() },
           }"
-          class="text-black font-bold p-2"
+          class="font-bold p-2 text-black"
         >
           {{ letter }}
         </router-link>
         <span
           v-else
-          class="text-white font-bold p-2"
+          class="font-bold p-2 text-white"
         >
           {{ letter }}
         </span>

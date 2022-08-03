@@ -15,7 +15,7 @@ const { currentWord } = storeToRefs(store);
   <li class="m-2.5">
     <span
       v-if="currentWord === word.title"
-      class="underline decoration-4 decoration-red-400"
+      class="decoration-4 decoration-red-400 underline"
     >
       {{ word.title }}
     </span>
@@ -29,7 +29,7 @@ const { currentWord } = storeToRefs(store);
           word: word.title
         },
       }"
-      class="underline decoration-4 decoration-indigo-400 hover:tracking-wider hover:decoration-8"
+      class="decoration-4 decoration-indigo-400 hover:decoration-8 hover:tracking-wider underline"
     >
       {{ word.title }}
     </router-link>

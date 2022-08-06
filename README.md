@@ -1,4 +1,4 @@
-# eesti
+# 🇪🇪 eesti
 
 Estonian dictionary SPA using MediaWiki API.
 

@@ -52,6 +52,7 @@ export interface StoreState {
   articleText: string | null,
   currentLetter: string,
   currentWord: string,
+  showInfo: boolean,
   words: CategoryMemberObject[] | [];
 }
 

@@ -1,7 +1,16 @@
 <script setup lang="ts">
-import TheDefinitionArea from '@/components/TheDefinitionArea.vue';
+import { storeToRefs } from 'pinia';
+
+import { mainStore } from '@/store';
+
+import InfoBlock from '@/components/InfoBlock.vue';
 import NavigationHeader from '@/components/NavigationHeader.vue';
+import TheDefinitionArea from '@/components/TheDefinitionArea.vue';
 import TheNavigationSidebar from '@/components/TheNavigationSidebar.vue';
+
+const store = mainStore();
+
+const { showInfo } = storeToRefs(store);
 </script>
 
 <template>
@@ -10,4 +19,9 @@ import TheNavigationSidebar from '@/components/TheNavigationSidebar.vue';
     <TheNavigationSidebar />
     <TheDefinitionArea />
   </div>
+  <Transition>
+    <InfoBlock
+      v-if="showInfo"
+    />
+  </Transition>
 </template>

@@ -33,6 +33,7 @@ export const mainStore = defineStore('main', {
       articleText: null,
       currentLetter: 'a',
       currentWord: '',
+      showInfo: false,
       words: [],
     };
   },

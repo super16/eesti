@@ -42,4 +42,12 @@
   article p span a {
     @apply decoration-4 decoration-indigo-400 hover:decoration-8 underline;
   }
+
+  .v-enter-active, .v-leave-active {
+    @apply transition delay-150;
+  }
+
+  .v-enter-from, .v-leave-to {
+    @apply opacity-0;
+  }
 }

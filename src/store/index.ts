@@ -32,6 +32,7 @@ export const mainStore = defineStore('main', {
     return {
       articleText: null,
       currentLetter: 'a',
+      currentPageId: null,
       currentWord: '',
       showInfo: false,
       words: [],
@@ -52,25 +53,33 @@ export const mainStore = defineStore('main', {
       });
     },
     getArticle(
-      section: string, page: string, pageid: string,
+      section: string, page: string, pageid: number | null,
     ): void {
       const params: ParseParams = {
         section, 
         ...parseParams,
       };
-      pageid ? params.pageid = pageid : params.page = page;
+      if (pageid) {
+        params.pageid = pageid;
+      } else {
+        params.page = page;
+      }
       axios.get('', { params }).then((response) => {
         const { data } = response;
         this.articleText = domCleaner(data.parse.text['*']);
       });
     },
-    getSection(page: string, pageid: string): void {
+    getSection(page: string, pageid: number | null): void {
       this.articleText = null;
       const params: ParseParams = {
         prop: 'sections',
         ...parseParams,
       };
-      pageid ? params.pageid = pageid : params.page = page;
+      if (pageid) {
+        params.pageid = pageid;
+      } else {
+        params.page = page;
+      }
       axios.get('', { params }).then((response) => {
         const { data } = response;
         const estonianSection: SectionObject = data.parse.sections.find(

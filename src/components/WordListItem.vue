@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
+import { useRouter } from 'vue-router';
 import { mainStore } from '@/store';
 
 let props = defineProps({
@@ -7,8 +8,20 @@ let props = defineProps({
   word: { type: Object, required: true },
 });
 
+const router = useRouter();
 const store = mainStore();
-const { currentWord } = storeToRefs(store);
+const { currentWord, currentPageId } = storeToRefs(store);
+
+function goToPage() {
+  currentPageId.value = props.word.pageid;
+  router.push({
+    name: 'exactWord',
+    params: {
+      letter: props.letter,
+      word: props.word.title,
+    },
+  });
+}
 </script>
 
 <template>
@@ -19,19 +32,12 @@ const { currentWord } = storeToRefs(store);
     >
       {{ word.title }}
     </span>
-    <router-link
+    <a
       v-else
-      :to="{
-        name: 'exactWord',
-        params: {
-          letter,
-          pageId: word.pageid,
-          word: word.title
-        },
-      }"
-      class="decoration-4 decoration-indigo-400 hover:decoration-8 hover:tracking-wider underline"
+      class="decoration-4 decoration-indigo-400 hover:cursor-pointer hover:decoration-8 hover:tracking-wider underline"
+      @click="goToPage"
     >
       {{ word.title }}
-    </router-link>
+    </a>
   </li>
 </template>

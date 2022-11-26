@@ -5,7 +5,7 @@ import TheWordMain from '@/components/TheWordMain.vue';
 
 export default createRouter({
   history: createWebHistory('/eesti/'),
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior(to) {
     if (to.name === 'wordsList') {
       const start = document.getElementById('start');
       if (start) {

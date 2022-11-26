@@ -17,7 +17,7 @@ currentLetter.value = letter.value;
 
 store.getWords(currentLetter.value);
 
-watch(letter, (value, prevCount) => {
+watch(letter, (value) => {
   currentLetter.value = value;
   store.getWords(currentLetter.value);
 });

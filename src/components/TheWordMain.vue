@@ -1,28 +1,25 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { toRefs, watch } from 'vue';
+import { watch } from 'vue';
 
 import { mainStore } from '@/store';
 
 let props = defineProps({
-  pageId: { type: String, required: true },
-  word: { type: String, required: true },
+  letter: { default: '', required: false, type: String },
+  word: { default: '', required: true, type: String },
 });
 
-const { pageId, word } = toRefs(props);
 const store = mainStore();
-const { articleText, currentWord } = storeToRefs(store);
+const { articleText, currentPageId, currentWord } = storeToRefs(store);
 
-currentWord.value = word.value;
+currentWord.value = props.word;
 
-store.getSection(currentWord.value, pageId.value);
+store.getSection(currentWord.value, currentPageId.value);
 
-watch(word, (value, prevCount) => {
-  currentWord.value = value;
-});
+watch(() => props.word, (value) => currentWord.value = value);
 
-watch(pageId, (value, prevCount) => {
-  store.getSection(currentWord.value, pageId.value);
+watch(currentPageId, (value) => {
+  store.getSection(currentWord.value, value);
 });
 </script>
 

@@ -15,7 +15,7 @@ export interface ParseParams {
   format: 'json',
   origin: '*',
   page?: string,
-  pageid?: string,
+  pageid?: number,
   prop?: string,
   section?: string,
 }
@@ -51,6 +51,7 @@ export interface SectionObject {
 export interface StoreState {
   articleText: string | null,
   currentLetter: string,
+  currentPageId: number | null,
   currentWord: string,
   showInfo: boolean,
   words: CategoryMemberObject[] | [];

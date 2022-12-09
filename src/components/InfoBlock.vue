@@ -36,8 +36,3 @@ const { showInfo } = storeToRefs(store);
     </svg>
   </dialog>
 </template>
-
-<style>
-
-
-</style>

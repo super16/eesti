@@ -12,7 +12,9 @@ const router = useRouter();
 const store = mainStore();
 const { currentWord, currentPageId } = storeToRefs(store);
 
-function goToPage() {
+const href: string = `${window.location.origin}/eesti/${props.letter}/${props.word.title}`;
+
+function goToPage(): void {
   currentPageId.value = props.word.pageid;
   router.push({
     name: 'exactWord',
@@ -35,7 +37,8 @@ function goToPage() {
     <a
       v-else
       class="decoration-4 decoration-indigo-400 hover:cursor-pointer hover:decoration-8 hover:tracking-wider underline"
-      @click="goToPage"
+      :href="href"
+      @click.prevent="goToPage"
     >
       {{ word.title }}
     </a>

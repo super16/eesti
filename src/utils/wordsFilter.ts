@@ -4,13 +4,11 @@ export default function (
   data: CategoryMemberObject[],
   letter: string,
 ): CategoryMemberObject[] {
-  let result = [];
-  for (let dataItem of data) {
+  return data.reduce((result: CategoryMemberObject[], dataItem) => {
     const { title } = dataItem;
-    if (title.startsWith(letter) ||
-      title.toLowerCase().startsWith(letter)) {
+    if (title.startsWith(letter) || title.toLowerCase().startsWith(letter)) {
       result.push(dataItem);
     }
-  }
-  return result;
+    return result
+  }, [])
 }

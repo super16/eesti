@@ -39,18 +39,27 @@ export const mainStore = defineStore('main', {
     };
   },
   actions: {
-    getWords(letter: string): void {
+    async getWords(letter: string): Promise<void> {
       const params: QueryParams = {
         cmstartsortkeyprefix: letter,
         ...queryParams,
       };
-      axios.get('', { params }).then((response) => {
-        const { data } = response;
-        this.words = wordsFilter(
-          data.query.categorymembers,
-          letter,
-        );
-      });
+      let response = await axios.get('', { params });
+      let data = response.data;
+      let categoryMembers = data.query.categorymembers;
+      this.words = wordsFilter(categoryMembers, letter);
+      let lastElement = categoryMembers[categoryMembers.length - 1];
+      while (data && lastElement?.title.startsWith(letter)) {
+        params.cmcontinue = data.continue.cmcontinue;
+        response = await axios.get('', { params });
+        data = response.data;
+        categoryMembers = data.query.categorymembers;
+        this.words = [
+          ...this.words,
+          ...wordsFilter(categoryMembers, letter),
+        ];
+        lastElement = categoryMembers[categoryMembers.length - 1];
+      }
     },
     getArticle(
       section: string, page: string, pageid: number | null,

@@ -22,6 +22,7 @@ export interface ParseParams {
 
 export interface QueryParams {
   action: 'query',
+  cmcontinue?: string,
   cmlimit: 499,
   cmsort: 'sortkey',
   cmstartsortkeyprefix?: string,

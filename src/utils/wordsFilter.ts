@@ -9,6 +9,6 @@ export default function (
     if (title.startsWith(letter) || title.toLowerCase().startsWith(letter)) {
       result.push(dataItem);
     }
-    return result
-  }, [])
+    return result;
+  }, []);
 }

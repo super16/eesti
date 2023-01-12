@@ -5,8 +5,6 @@ import { mainStore } from '@/store';
 
 import InfoBlock from '@/components/InfoBlock.vue';
 import NavigationHeader from '@/components/NavigationHeader.vue';
-import TheDefinitionArea from '@/components/TheDefinitionArea.vue';
-import TheNavigationSidebar from '@/components/TheNavigationSidebar.vue';
 
 const store = mainStore();
 
@@ -16,8 +14,12 @@ const { showInfo } = storeToRefs(store);
 <template>
   <NavigationHeader />
   <div class="flex flex-col-reverse sm:flex-row grow min-h-0">
-    <TheNavigationSidebar />
-    <TheDefinitionArea />
+    <nav class="border-black h-full overflow-y-auto sm:border-r-8 sm:w-96 w-full">
+      <router-view name="LeftSidebar" />
+    </nav>
+    <main class="border-b-8 border-black h-full lg:px-20 lg:py-14 overflow-y-auto px-6 py-4 sm:border-b-0 sm:h-auto sm:px-8 sm:py-6 w-full">
+      <router-view name="MainArea" />
+    </main>
   </div>
   <Transition>
     <InfoBlock

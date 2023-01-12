@@ -27,3 +27,13 @@ const { showInfo } = storeToRefs(store);
     />
   </Transition>
 </template>
+
+<style lang="postcss">
+.v-enter-active, .v-leave-active {
+  @apply transition delay-300;
+}
+
+.v-enter-from, .v-leave-to {
+  @apply opacity-0;
+}
+</style>

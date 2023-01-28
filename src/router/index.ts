@@ -6,17 +6,20 @@ import TheWordMain from '@/components/TheWordMain.vue';
 export default createRouter({
   history: createWebHistory('/eesti/'),
   scrollBehavior(to) {
-    if (to.name === 'wordsList') {
-      const start = document.getElementById('start');
-      if (start) {
-        start.scrollIntoView({ behavior: 'smooth' });
+    return new Promise((resolve) => {
+      if (to.name === 'wordsList') {
+        const start = document.getElementById('start');
+        if (start) {
+          start.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else if (to.name === 'exactWord') {
+        const definitionStart = document.getElementById('definition');
+        if (definitionStart) {
+          definitionStart.scrollIntoView({ behavior: 'smooth' });
+        }
       }
-    } else if (to.name === 'exactWord') {
-      const definitionStart = document.getElementById('definition');
-      if (definitionStart) {
-        definitionStart.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
+      resolve();
+    });
   },
   routes: [
     {

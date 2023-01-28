@@ -4,6 +4,7 @@ import { defineStore } from 'pinia';
 import wordsFilter from '@/utils/wordsFilter';
 import domCleaner from '@/utils/domCleaner';
 import {
+  CategoryMemberObject,
   ParseParams,
   QueryParams,
   SectionObject,
@@ -39,6 +40,13 @@ export const mainStore = defineStore('main', {
     };
   },
   actions: {
+    addWords(filteredWords: CategoryMemberObject[]) {
+      filteredWords.forEach((fWord: CategoryMemberObject) => {
+        window.requestAnimationFrame(() => {
+          this.words.push(fWord);
+        });
+      });
+    },
     async getWords(letter: string): Promise<void> {
       const params: QueryParams = {
         cmstartsortkeyprefix: letter,
@@ -47,17 +55,15 @@ export const mainStore = defineStore('main', {
       let response = await axios.get('', { params });
       let data = response.data;
       let categoryMembers = data.query.categorymembers;
-      this.words = wordsFilter(categoryMembers, letter);
+      this.words = [];
+      this.addWords(wordsFilter(categoryMembers, letter));
       let lastElement = categoryMembers[categoryMembers.length - 1];
       while (data && lastElement?.title.startsWith(letter)) {
         params.cmcontinue = data.continue.cmcontinue;
         response = await axios.get('', { params });
         data = response.data;
         categoryMembers = data.query.categorymembers;
-        this.words = [
-          ...this.words,
-          ...wordsFilter(categoryMembers, letter),
-        ];
+        this.addWords(wordsFilter(categoryMembers, letter));
         lastElement = categoryMembers[categoryMembers.length - 1];
       }
     },

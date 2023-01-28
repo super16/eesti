@@ -60,7 +60,7 @@ const { currentLetter } = storeToRefs(store);
 </script>
 
 <template>
-  <nav>
+  <nav class="flex justify-center">
     <ul class="flex flex-wrap">
       <li
         v-for="letter in alphabet"

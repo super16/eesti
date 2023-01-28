@@ -36,8 +36,6 @@ const { showInfo } = storeToRefs(store);
         </svg>
       </div>
     </div>
-    <div class="flex justify-center">
-      <AlphabetList />
-    </div>
+    <AlphabetList />
   </header>
 </template>

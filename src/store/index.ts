@@ -35,8 +35,10 @@ export const mainStore = defineStore('main', {
       currentLetter: 'a',
       currentPageId: null,
       currentWord: '',
+      definitionLoading: false,
       showInfo: false,
       words: [],
+      wordsLoading: false,
     };
   },
   actions: {
@@ -48,6 +50,7 @@ export const mainStore = defineStore('main', {
       });
     },
     async getWords(letter: string): Promise<void> {
+      this.wordsLoading = true;
       const params: QueryParams = {
         cmstartsortkeyprefix: letter,
         ...queryParams,
@@ -66,6 +69,7 @@ export const mainStore = defineStore('main', {
         this.addWords(wordsFilter(categoryMembers, letter));
         lastElement = categoryMembers[categoryMembers.length - 1];
       }
+      this.wordsLoading = false;
     },
     getArticle(
       section: string, page: string, pageid: number | null,
@@ -83,8 +87,10 @@ export const mainStore = defineStore('main', {
         const { data } = response;
         this.articleText = domCleaner(data.parse.text['*']);
       });
+      this.definitionLoading = false;
     },
     getSection(page: string, pageid: number | null): void {
+      this.definitionLoading = true;
       this.articleText = null;
       const params: ParseParams = {
         prop: 'sections',

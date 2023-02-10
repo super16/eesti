@@ -24,10 +24,7 @@ watch(letter, (value) => {
 </script>
 
 <template>
-  <ul
-    id="start"
-    class="font-bold p-4 text-black text-xl"
-  >
+  <ul class="font-bold p-4 text-black text-xl">
     <WordListItem
       v-for="word in words"
       :key="word.title"

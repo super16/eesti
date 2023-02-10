@@ -54,7 +54,9 @@ export interface StoreState {
   currentLetter: string,
   currentPageId: number | null,
   currentWord: string,
+  definitionLoading: boolean,
   showInfo: boolean,
-  words: CategoryMemberObject[];
+  words: CategoryMemberObject[],
+  wordsLoading: boolean,
 }
 

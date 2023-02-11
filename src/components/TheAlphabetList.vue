@@ -46,10 +46,18 @@ const bgColors: Array<string> = [
   'bg-yellow-200',
 ];
 
+/**
+ * Add random background color class selector from bgColors const.
+ * @returns Random color class name.
+ */
 function randomBgColor(): string {
   return bgColors[Math.floor(Math.random() * bgColors.length)];
 }
 
+/**
+ * Add random rotation class selector/
+ * @returns Random rotation class name.
+ */
 function randomRotate(): string {
   const rotate = Math.random() < 0.5 ? '-' : '';
   return `${rotate}rotate-12 hover:-rotate-0 hover:scale-110`;

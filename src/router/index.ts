@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import TheLetterMain from '@/components/TheLetterMain.vue';
-import TheWordMain from '@/components/TheWordMain.vue';
+import LetterView from '@/views/LetterView.vue';
+import WordView from '@/views/WordView.vue';
 
 export default createRouter({
   history: createWebHistory('/eesti/'),
@@ -22,19 +22,19 @@ export default createRouter({
   },
   routes: [
     {
-      component: TheLetterMain,
+      component: LetterView,
       name: 'wordsList',
       path: '/:letter',
       props: true,
     },
     {
-      component: TheWordMain,
+      component: WordView,
       name: 'exactWord',
       path: '/:letter/:word',
       props: true,
     },
     {
-      component: TheLetterMain,
+      component: LetterView,
       name: 'index',
       path: '/',
       props: true,

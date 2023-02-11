@@ -14,6 +14,9 @@ const { letter } = toRefs(props);
 
 currentLetter.value = letter.value || currentLetter.value;
 
+/**
+ * Detect letter changing.
+ */
 watch(() => props.letter, (value) => currentLetter.value = value);
 </script>
 

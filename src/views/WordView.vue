@@ -18,10 +18,19 @@ currentLetter.value = letter.value;
 
 store.getSection(currentWord.value, currentPageId.value);
 
+/**
+ * Detect word changing.
+ */
 watch(() => props.word, (value) => currentWord.value = value);
 
+/**
+ * Detect letter changing.
+ */
 watch(() => props.letter, (value) => currentLetter.value = value);
 
+/**
+ * Detect pageId changing.
+ */
 watch(currentPageId, (value) => {
   store.getSection(currentWord.value, value);
 });

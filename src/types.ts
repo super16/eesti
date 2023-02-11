@@ -59,4 +59,3 @@ export interface StoreState {
   words: CategoryMemberObject[],
   wordsLoading: boolean,
 }
-

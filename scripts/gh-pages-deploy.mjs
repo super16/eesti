@@ -3,6 +3,7 @@ import { execa } from 'execa';
 (async () => {
   try {
     await execa('git', ['checkout', '--orphan', 'gh-pages']);
+    await execa('npm', ['run', 'test:unit']);
     await execa('npm', ['run', 'build']);
     await execa('git', ['--work-tree', 'dist', 'add', '--all']);
     await execa('git', ['--work-tree', 'dist', 'commit', '-m', 'gh-pages deployment']);

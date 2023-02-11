@@ -42,28 +42,44 @@ export const mainStore = defineStore('main', {
     };
   },
   actions: {
-    addWords(filteredWords: CategoryMemberObject[]) {
+    /**
+     * Add words from request to menu of words array.
+     * @param {Array} filteredWords Array of filtered words.
+    */
+    addWords(filteredWords: CategoryMemberObject[]): void {
       filteredWords.forEach((fWord: CategoryMemberObject) => {
         window.requestAnimationFrame(() => {
           this.words.push(fWord);
         });
       });
     },
+
+    /**
+     * Get list of words with given letter from API
+     * and save to store.
+     * @param {Array} letter The letter with which the words begin.
+    */
     async getWords(letter: string): Promise<void> {
       this.wordsLoading = true;
+
       const params: QueryParams = {
         cmstartsortkeyprefix: letter,
         ...queryParams,
       };
+
       let response = await axios.get('', { params });
-      let data = response.data;
+      let { data } = response;
       let categoryMembers = data.query.categorymembers;
       this.words = [];
+
       this.addWords(wordsFilter(categoryMembers, letter));
       let lastElement = categoryMembers[categoryMembers.length - 1];
+
       while (data && lastElement?.title.startsWith(letter)) {
         params.cmcontinue = data.continue.cmcontinue;
+
         response = await axios.get('', { params });
+
         data = response.data;
         categoryMembers = data.query.categorymembers;
         this.addWords(wordsFilter(categoryMembers, letter));
@@ -71,43 +87,59 @@ export const mainStore = defineStore('main', {
       }
       this.wordsLoading = false;
     },
-    getArticle(
+
+    /**
+     * Get article of given word and save to store.
+     * @param {string} section Section index defining Estonian.
+     * @param {string} page Page of article.
+     * @param {string} pageid Page id of article.
+    */
+    async getArticle(
       section: string, page: string, pageid: number | null,
-    ): void {
+    ): Promise<void> {
       const params: ParseParams = {
         section, 
         ...parseParams,
       };
+
       if (pageid) {
         params.pageid = pageid;
       } else {
         params.page = page;
       }
-      axios.get('', { params }).then((response) => {
-        const { data } = response;
-        this.articleText = domCleaner(data.parse.text['*']);
-      });
+
+      const response = await axios.get('', { params });
+      const { data } = response;
+      this.articleText = domCleaner(data.parse.text['*']);
       this.definitionLoading = false;
     },
-    getSection(page: string, pageid: number | null): void {
+
+    /**
+     * Get sections of article to find Estonian part
+     * and afterwards to get the content.
+     * @param {string} page Page of article.
+     * @param {string} pageid Page id of article.
+    */
+    async getSection(page: string, pageid: number | null): Promise<void> {
       this.definitionLoading = true;
       this.articleText = null;
       const params: ParseParams = {
         prop: 'sections',
         ...parseParams,
       };
+
       if (pageid) {
         params.pageid = pageid;
       } else {
         params.page = page;
       }
-      axios.get('', { params }).then((response) => {
-        const { data } = response;
-        const estonianSection: SectionObject = data.parse.sections.find(
-          (sec: SectionObject) => sec.anchor === 'Estonian',
-        );
-        this.getArticle(estonianSection.index, page, pageid);
-      });
+
+      const response = await axios.get('', { params });
+      const { data } = response;
+      const estonianSection: SectionObject = data.parse.sections.find(
+        (sec: SectionObject) => sec.anchor === 'Estonian',
+      );
+      this.getArticle(estonianSection.index, page, pageid);
     },
   },
 });

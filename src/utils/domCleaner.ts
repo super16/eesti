@@ -1,3 +1,10 @@
+/** @module domCleaner */
+
+/**
+ * Remove unnessesary DOM-elements from raw string.
+ * @param {string} raw HTML document as raw string.
+ * @returns {string} Cleaned HTML document as raw string.
+*/
 export default function (raw: string): string {
   const parser = new DOMParser();
   const parsedDom = parser.parseFromString(raw, 'text/html');

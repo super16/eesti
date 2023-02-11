@@ -7,6 +7,9 @@ let props = defineProps({
 
 const progressLevel = ref<number>(0);
 
+/**
+ * Run loading bar animation when is true.
+ */
 watch(() => props.isLoading, (value) => {
   if (value) {
     const incrementBar = setInterval(() => {

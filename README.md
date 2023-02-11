@@ -6,18 +6,30 @@ Estonian dictionary SPA using MediaWiki API.
 
 ## Project setup
 
-```bash
+```shell
 npm install
 ```
 
 ## Development run
 
-```bash
+```shell
 npm run dev
+```
+
+## Test
+
+```shell
+npm run test
+```
+
+### Coverage
+
+```shell
+npm run coverage
 ```
 
 ## Production build
 
-```bash
+```shell
 npm run build
 ```

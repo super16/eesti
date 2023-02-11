@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia';
 
 import { mainStore } from '@/store';
 
-import AlphabetList from '@/components/AlphabetList.vue';
+import AlphabetList from '@/components/TheAlphabetList.vue';
 
 const store = mainStore();
 

@@ -10,14 +10,17 @@ let props = defineProps({
 });
 
 const store = mainStore();
-const { word } = toRefs(props);
-const { articleText, currentPageId, currentWord } = storeToRefs(store);
+const { letter, word } = toRefs(props);
+const { articleText, currentLetter, currentPageId, currentWord } = storeToRefs(store);
 
 currentWord.value = word.value;
+currentLetter.value = letter.value;
 
 store.getSection(currentWord.value, currentPageId.value);
 
 watch(() => props.word, (value) => currentWord.value = value);
+
+watch(() => props.letter, (value) => currentLetter.value = value);
 
 watch(currentPageId, (value) => {
   store.getSection(currentWord.value, value);

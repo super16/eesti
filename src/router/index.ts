@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import WordsList from '@/components/WordsList.vue';
 import TheLetterMain from '@/components/TheLetterMain.vue';
 import TheWordMain from '@/components/TheWordMain.vue';
 
@@ -8,7 +7,7 @@ export default createRouter({
   scrollBehavior(to) {
     return new Promise((resolve) => {
       if (to.name === 'wordsList') {
-        const start = document.getElementById('start');
+        const start = document.getElementById('words-list');
         if (start) {
           start.scrollIntoView({ behavior: 'smooth' });
         }
@@ -23,34 +22,22 @@ export default createRouter({
   },
   routes: [
     {
-      components: {
-        LeftSidebar: WordsList,
-        MainArea: TheLetterMain,
-      },
+      component: TheLetterMain,
       name: 'wordsList',
       path: '/:letter',
       props: true,
     },
     {
-      components: {
-        LeftSidebar: WordsList,
-        MainArea: TheWordMain,
-      },
+      component: TheWordMain,
       name: 'exactWord',
       path: '/:letter/:word',
       props: true,
     },
     {
-      components: {
-        LeftSidebar: WordsList,
-        MainArea: TheLetterMain,
-      },
+      component: TheLetterMain,
       name: 'index',
       path: '/',
-      props: {
-        LeftSidebar: () => ({ letter: 'a' }),
-        MainArea: true,
-      },
+      props: true,
     },
   ],
 });

@@ -66,26 +66,28 @@ export const mainStore = defineStore('main', {
         cmstartsortkeyprefix: letter,
         ...queryParams,
       };
-
-      let response = await axios.get('', { params });
-      let { data } = response;
-      let categoryMembers = data.query.categorymembers;
-      this.words = [];
-
-      this.addWords(wordsFilter(categoryMembers, letter));
-      let lastElement = categoryMembers[categoryMembers.length - 1];
-
-      while (data && lastElement?.title.startsWith(letter)) {
-        params.cmcontinue = data.continue.cmcontinue;
-
-        response = await axios.get('', { params });
-
-        data = response.data;
-        categoryMembers = data.query.categorymembers;
+      try {
+        let { data } = await axios.get('', { params });
+        let categoryMembers = data.query.categorymembers;
+        this.words = [];
+  
         this.addWords(wordsFilter(categoryMembers, letter));
-        lastElement = categoryMembers[categoryMembers.length - 1];
+        let lastElement = categoryMembers[categoryMembers.length - 1];
+  
+        while (data && lastElement?.title.startsWith(letter)) {
+          params.cmcontinue = data.continue.cmcontinue;
+  
+          let response = await axios.get('', { params });
+
+          data = response.data;
+          categoryMembers = data.query.categorymembers;
+          this.addWords(wordsFilter(categoryMembers, letter));
+          lastElement = categoryMembers[categoryMembers.length - 1];
+        }
+        this.wordsLoading = false;
+      } catch (error: any) {
+        throw new Error(error);
       }
-      this.wordsLoading = false;
     },
 
     /**
@@ -108,10 +110,13 @@ export const mainStore = defineStore('main', {
         params.page = page;
       }
 
-      const response = await axios.get('', { params });
-      const { data } = response;
-      this.articleText = domCleaner(data.parse.text['*']);
-      this.definitionLoading = false;
+      try {
+        const { data } = await axios.get('', { params });
+        this.articleText = domCleaner(data.parse.text['*']);
+        this.definitionLoading = false;
+      } catch (error: any) {
+        throw new Error(error);
+      }
     },
 
     /**
@@ -134,12 +139,15 @@ export const mainStore = defineStore('main', {
         params.page = page;
       }
 
-      const response = await axios.get('', { params });
-      const { data } = response;
-      const estonianSection: SectionObject = data.parse.sections.find(
-        (sec: SectionObject) => sec.anchor === 'Estonian',
-      );
-      this.getArticle(estonianSection.index, page, pageid);
+      try {
+        const { data } = await axios.get('', { params });
+        const estonianSection: SectionObject = data.parse.sections.find(
+          (sec: SectionObject) => sec.anchor === 'Estonian',
+        );
+        this.getArticle(estonianSection.index, page, pageid);
+      } catch (error: any) {
+        throw new Error(error);
+      }      
     },
   },
 });

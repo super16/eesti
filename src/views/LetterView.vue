@@ -17,11 +17,14 @@ currentLetter.value = letter.value || currentLetter.value;
 /**
  * Detect letter changing.
  */
-watch(() => props.letter, (value) => currentLetter.value = value);
+watch(() => props.letter, (value) => {
+  currentLetter.value = value;
+  store.getWords(value);
+}, { immediate: true });
 </script>
 
 <template>
-  <h1 class="font-bold inline p-3 rounded-lg text-8xl text-black">
+  <h1 class="heading-1">
     {{ currentLetter.toUpperCase() }}
   </h1>
 </template>

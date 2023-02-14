@@ -68,12 +68,12 @@ const { currentLetter } = storeToRefs(store);
 </script>
 
 <template>
-  <nav class="flex justify-center">
-    <ul class="flex flex-wrap">
+  <nav class="nav-menu">
+    <ul class="menu-list">
       <li
         v-for="letter in alphabet"
         :key="letter"
-        class="border-black border-4 hover:hue-rotate-180 mx-3 my-4 rounded-full"
+        class="menu-item"
         :class="{
           'bg-black scale-110': letter.toLowerCase() === currentLetter,
           [randomRotate()]: letter.toLowerCase() !== currentLetter,
@@ -86,13 +86,13 @@ const { currentLetter } = storeToRefs(store);
             name: 'wordsList',
             params: { letter: letter.toLowerCase() },
           }"
-          class="font-bold p-2 text-black"
+          class="menu-label text-black"
         >
           {{ letter }}
         </router-link>
         <span
           v-else
-          class="font-bold p-2 text-white"
+          class="menu-label text-white"
         >
           {{ letter }}
         </span>
@@ -100,3 +100,33 @@ const { currentLetter } = storeToRefs(store);
     </ul>
   </nav>
 </template>
+
+<style scoped lang="postcss">
+.nav-menu {
+  @apply
+    flex
+    justify-center;
+}
+
+.menu-list {
+  @apply
+    flex
+    flex-wrap;
+}
+
+.menu-item {
+  @apply
+  border-black
+  border-4
+  hover:hue-rotate-180
+  mx-3
+  my-4
+  rounded-full;
+}
+
+.menu-label {
+  @apply
+    font-bold
+    p-2;
+}
+</style>

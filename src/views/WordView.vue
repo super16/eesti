@@ -13,8 +13,12 @@ const store = mainStore();
 const { letter, word } = toRefs(props);
 const { articleText, currentLetter, currentPageId, currentWord } = storeToRefs(store);
 
+if (currentLetter.value !== letter.value) {
+  currentLetter.value = letter.value;
+  store.getWords(currentLetter.value);
+}
+
 currentWord.value = word.value;
-currentLetter.value = letter.value;
 
 store.getSection(currentWord.value, currentPageId.value);
 
@@ -37,14 +41,13 @@ watch(currentPageId, (value) => {
 </script>
 
 <template>
-  <h1
-    id="definition"
-    class="break-words font-bold inline rounded-lg text-8xl text-black"
-  >
+  <h1 class="break-words heading-1">
     {{ currentWord }}
   </h1>
+  <!-- eslint-disable vue/no-v-html -->
   <article
     class="mt-8"
     v-html="articleText"
   />
+  <!--eslint-enable-->
 </template>

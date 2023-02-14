@@ -10,12 +10,12 @@ const { showInfo } = storeToRefs(store);
 
 <template>
   <dialog
-    class="bg-lime-200 border-8 border-black bottom-6 fixed flex h-20 justify-between w-96"
+    class="dialog"
     :open="showInfo"
   >
-    <span class="font-bold text-black text-xl">
+    <span class="dialog-text">
       Application made by <a
-        class="decoration-4 decoration-red-400 hover:decoration-8 hover:tracking-wider underline"
+        class="dialog-link"
         href="https://github.com/super16"
       >super16</a>
     </span>
@@ -25,7 +25,7 @@ const { showInfo } = storeToRefs(store);
       viewBox="0 0 24 24"
       stroke-width="4"
       stroke="currentColor"
-      class="w-6 h-6 hover:cursor-pointer hover:text-red-400"
+      class="dialog-icon"
       @click="showInfo = !showInfo"
     >
       <path
@@ -36,3 +36,42 @@ const { showInfo } = storeToRefs(store);
     </svg>
   </dialog>
 </template>
+
+<style scoped lang="postcss">
+.dialog {
+  @apply
+    bg-lime-200
+    border-8
+    border-black
+    bottom-6
+    fixed
+    flex
+    h-20
+    justify-between
+    w-96;
+}
+
+.dialog-icon {
+  @apply
+    h-6
+    hover:cursor-pointer
+    hover:text-red-400
+    w-6;
+}
+
+.dialog-link {
+  @apply
+    decoration-4
+    decoration-red-400
+    hover:decoration-8
+    hover:tracking-wider
+    underline;
+}
+
+.dialog-text {
+  @apply
+    font-bold
+    text-black
+    text-xl;
+}
+</style>

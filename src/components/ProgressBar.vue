@@ -26,7 +26,7 @@ watch(() => props.isLoading, (value) => {
 
 <template>
   <progress
-    class="appearance-none bg-transparent border-none block h-1.5 w-full"
+    class="progress"
     :max="100"
     :value="progressLevel"
   >
@@ -34,7 +34,7 @@ watch(() => props.isLoading, (value) => {
   </progress>
 </template>
 
-<style>
+<style scoped lang="postcss">
 progress[value]::-webkit-progress-bar {
   @apply bg-transparent;
 }
@@ -45,5 +45,15 @@ progress[value]::-webkit-progress-value {
 
 progress[value]::-moz-progress-bar {
   @apply bg-indigo-400;
+}
+
+.progress {
+  @apply
+    appearance-none
+    bg-transparent
+    border-none
+    block
+    h-1.5
+    w-full;
 }
 </style>

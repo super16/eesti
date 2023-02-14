@@ -2,13 +2,13 @@ import axios from 'axios';
 import { createPinia } from 'pinia';
 import { createApp } from 'vue';
 
-import App from './App.vue';
+import AppComponent from './AppComponent.vue';
 import router from './router';
 import './index.css';
 
-axios.defaults.baseURL = 'https://en.wiktionary.org/w/api.php';
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
-createApp(App)
+createApp(AppComponent)
   .use(createPinia())
   .use(router)
   .mount('#app');

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { watch } from 'vue';
 
 import { mainStore } from '@/store';
 
@@ -19,16 +18,12 @@ const {
   wordsLoading,
   words,
 } = storeToRefs(store);
-
-store.getWords(currentLetter.value);
-
-watch(currentLetter, (value) => store.getWords(value));
 </script>
 
 <template>
   <NavigationHeader />
-  <div class="flex flex-col-reverse sm:flex-row grow min-h-0">
-    <nav class="border-black h-full overflow-y-auto sm:border-r-8 sm:w-96 w-full">
+  <div class="content-container">
+    <nav class="scrollable nav-menu">
       <ProgressBar
         id="words-list"
         :is-loading="wordsLoading"
@@ -45,14 +40,14 @@ watch(currentLetter, (value) => store.getWords(value));
         />
       </WordsList>
     </nav>
-    <main class="border-b-8 border-black h-full overflow-y-auto sm:border-b-0 sm:h-auto w-full">
+    <main class="main-container scrollable">
       <ProgressBar
         id="definition"
         :is-loading="definitionLoading"
       />
       <section
         :aria-busy="definitionLoading"
-        class="lg:px-20 lg:py-14 px-6 py-4 sm:px-8 sm:py-6"
+        class="definition"
         aria-describedby="definition"
       >
         <router-view />
@@ -66,9 +61,52 @@ watch(currentLetter, (value) => store.getWords(value));
   </Transition>
 </template>
 
-<style lang="postcss">
+<style scoped lang="postcss">
+.content-container {
+  @apply
+    flex
+    flex-col-reverse
+    sm:flex-row
+    grow
+    min-h-0;
+}
+
+.definition {
+  @apply
+    lg:px-20
+    lg:py-14
+    px-6
+    py-4
+    sm:px-8
+    sm:py-6;
+}
+
+.main-container {
+  @apply
+    border-b-8
+    sm:border-b-0
+    sm:h-auto
+    w-full;
+}
+
+.nav-menu {
+  @apply
+    sm:border-r-8
+    sm:w-96
+    w-full;
+}
+
+.scrollable {
+  @apply
+    border-black
+    h-full
+    overflow-y-auto;
+}
+
 .v-enter-active, .v-leave-active {
-  @apply transition delay-300;
+  @apply
+    transition
+    delay-300;
 }
 
 .v-enter-from, .v-leave-to {

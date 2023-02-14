@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import LetterView from '@/views/LetterView.vue';
-import WordView from '@/views/WordView.vue';
+
+const LetterView = () => import('@/views/LetterView.vue');
+const WordView = () => import('@/views/WordView.vue');
 
 export default createRouter({
   history: createWebHistory('/eesti/'),
@@ -10,11 +11,6 @@ export default createRouter({
         const start = document.getElementById('words-list');
         if (start) {
           start.scrollIntoView({ behavior: 'smooth' });
-        }
-      } else if (to.name === 'exactWord') {
-        const definitionStart = document.getElementById('definition');
-        if (definitionStart) {
-          definitionStart.scrollIntoView({ behavior: 'smooth' });
         }
       }
       resolve();
@@ -37,7 +33,7 @@ export default createRouter({
       component: LetterView,
       name: 'index',
       path: '/',
-      props: true,
+      props: () => ({ letter: 'a' }),
     },
   ],
 });

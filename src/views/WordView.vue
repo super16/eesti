@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { toRefs, watch } from 'vue';
+import { watch, watchEffect } from 'vue';
 
 import { mainStore } from '@/store';
 
@@ -10,34 +10,33 @@ let props = defineProps({
 });
 
 const store = mainStore();
-const { letter, word } = toRefs(props);
-const { articleText, currentLetter, currentPageId, currentWord } = storeToRefs(store);
-
-if (currentLetter.value !== letter.value) {
-  currentLetter.value = letter.value;
-  store.getWords(currentLetter.value);
-}
-
-currentWord.value = word.value;
-
-store.getSection(currentWord.value, currentPageId.value);
+const {
+  articleText,
+  currentLetter,
+  currentPageId,
+  currentWord,
+} = storeToRefs(store);
 
 /**
- * Detect word changing.
+ * Detect props changing.
  */
-watch(() => props.word, (value) => currentWord.value = value);
-
-/**
- * Detect letter changing.
- */
-watch(() => props.letter, (value) => currentLetter.value = value);
+watchEffect(() => {
+  if (currentLetter.value !== props.letter) {
+    currentLetter.value = props.letter;
+    store.getWords(currentLetter.value);
+  } else {
+    currentLetter.value = props.letter;
+  }
+  
+  currentWord.value = props.word;
+});
 
 /**
  * Detect pageId changing.
  */
 watch(currentPageId, (value) => {
   store.getSection(currentWord.value, value);
-});
+}, { immediate : true });
 </script>
 
 <template>

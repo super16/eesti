@@ -7,29 +7,24 @@ Estonian dictionary SPA using MediaWiki API.
 ## Project setup
 
 ```shell
-npm install
+pnpm install
 ```
 
 ## Development run
 
 ```shell
-npm run dev
+pnpm run dev
 ```
 
-## Test
+## Test & Coverage
 
 ```shell
-npm run test
-```
-
-### Coverage
-
-```shell
-npm run coverage
+pnpm run test
+pnpm run coverage
 ```
 
 ## Production build
 
 ```shell
-npm run build
+pnpm run build
 ```

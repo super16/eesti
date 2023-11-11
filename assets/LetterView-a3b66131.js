@@ -1,0 +1,1 @@
+import{d as a,m as o,s as n,w as c,c as l,t as p,u as i,o as u}from"./index-c8c9b4ef.js";const f={class:"heading-1"},h=a({__name:"LetterView",props:{letter:{default:"",required:!1,type:String}},setup(s){let r=s;const t=o(),{currentLetter:e}=n(t);return c(()=>{e.value=r.letter,t.getWords(e.value)}),(d,m)=>(u(),l("h1",f,p(i(e).toUpperCase()),1))}});export{h as default};
